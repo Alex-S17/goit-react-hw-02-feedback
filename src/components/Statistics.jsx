@@ -2,26 +2,24 @@ import React from "react";
 import PropTypes from "prop-types";
 import css from "./Statistics.module.css";
 
-export const Statistics = ({ state, countTotalFeedback, countPercentage }) => (
+export const Statistics = ({ good, neutral, bad, countTotalFeedback, countPercentage }) => (
   <div >
-    {countTotalFeedback(state) > 0
+    {countTotalFeedback(good, neutral, bad) > 0
       ? <div className={css.statWrapper}>
-        <p className={css.statistics}>Good: {state.good}</p>
-        <p className={css.statistics}>Neutral: {state.neutral}</p>
-        <p className={css.statistics}>Bad: {state.bad}</p>
-        <p className={css.statistics} >Total: {countTotalFeedback(state)}</p>
-        <p className={css.statistics}>Positive feedback: {state.good > 0 ? countPercentage(state) : 0}%</p>
+        <p className={css.statistics}>Good: {good}</p>
+        <p className={css.statistics}>Neutral: {neutral}</p>
+        <p className={css.statistics}>Bad: {bad}</p>
+        <p className={css.statistics} >Total: {countTotalFeedback(good, neutral, bad)}</p>
+        <p className={css.statistics}>Positive feedback: {good > 0 ? countPercentage(good, neutral, bad) : 0}%</p>
         </div>
       : <p className={css.statistics}>There is no feedback</p>}
   </div>  
 );
 
 Statistics.propTypes = {
- state: PropTypes.shape({
-    good: PropTypes.number.isRequired,
-    neutral: PropTypes.number.isRequired,
-    bad: PropTypes.number.isRequired,
-  }).isRequired,
+  good: PropTypes.number.isRequired,
+  neutral: PropTypes.number.isRequired,
+  bad: PropTypes.number.isRequired,  
   countTotalFeedback: PropTypes.func.isRequired,
   countPercentage: PropTypes.func.isRequired,
 };
