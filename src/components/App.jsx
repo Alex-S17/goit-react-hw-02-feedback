@@ -28,12 +28,14 @@ export class App extends Component {
   }
 
   render() {
-    const {good, neutral, bad} = this.state
+    const { good, neutral, bad } = this.state;
+    const btnLabelArray = Object.keys(this.state);
+
     return (
       <div className={css.wrapper}>      
         <Section title={'Please leave feedback'}>
           <FeedbackOptions
-            options={this.state}
+            btnLabelArray={btnLabelArray}
             onLeaveFeedback={this.handleIncriment}
           />
         </Section>
